@@ -646,17 +646,6 @@ var Chess = function(fen) {
   
       return legal_moves
     }
-  
-    /* convert a move from 0x88 coordinates to Standard Algebraic Notation
-     * (SAN)
-     *
-     * @param {boolean} sloppy Use the sloppy SAN generator to work around over
-     * disambiguation bugs in Fritz and Chessbase.  See below:
-     *
-     * r1bqkbnr/ppp2ppp/2n5/1B1pP3/4P3/8/PPPP2PP/RNBQK1NR b KQkq - 2 4
-     * 4. ... Nge7 is overly disambiguated because the knight on c6 is pinned
-     * 4. ... Ne7 is technically the valid SAN
-     */
     function move_to_san(move, sloppy) {
       var output = ''
   
@@ -814,11 +803,6 @@ var Chess = function(fen) {
     }
   
     function in_threefold_repetition() {
-      /* TODO: while this function is fine for casual use, a better
-       * implementation would use a Zobrist key (instead of FEN). the
-       * Zobrist key would be maintained in the make_move/undo_move functions,
-       * avoiding the costly that we do below.
-       */
       var moves = []
       var positions = {}
       var repetition = false
